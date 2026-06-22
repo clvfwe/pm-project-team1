@@ -13,13 +13,30 @@ int main(){
     printf("===========================================================\n");
     printf("성적 분석 프로그램\n");
 
-    for(int i = 1;i <= 6;++i){
-        printf("%d반의 학생 수를 입력해 주세요.\n====>   ",i);
-        scanf("%d",student + i);
+      for(int i = 1;i <= 6;++i){
+        BACK:
+        printf("%d반의 학생 수를 입력해주세요.\n====>   ",i);
+        while (scanf("%d", student + i) != 1) {
+            int c;
+            while ((c = getchar()) != '\n' && c != EOF);
+            printf("숫자로 다시 입력해주세요.\n");
+        }
+        if(student[i] >= 50){
+            printf("학생 수가 너무 많습니다. 다시 입력해주세요.\n");
+            goto BACK;
+        }
+        if(student[i] <= 0){
+            printf("학생수가 너무 적습니다. 다시 입력해주세요.\n");
+            goto BACK;
+        }
         for(int j = 1;j <= student[i];++j){
-            printf("%d반 %d번 학생의 성적을 입력해 주세요.(국어-영어-수학-한국사-사회탐구-과학탐구)\n====>   ",i,j);
+            printf("%d반 %d번 학생의 성적을 입력해주세요.(국어-영어-수학-한국사-사회탐구-과학탐구 순서)\n====>   ",i,j);
             for(int k = 0;k < 6;++k){
-                scanf("%d",&score[i][j][k]);
+                while (scanf("%d", &score[i][j][k]) != 1) {
+                    int c;
+                    while ((c = getchar()) != '\n' && c != EOF);
+                    printf("숫자로 다시 입력해주세요.\n");
+                }
                 score[i][j][6] += score[i][j][k];
             }
         }
